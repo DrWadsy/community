@@ -1,71 +1,26 @@
+---
+status: proposed
+title: Custom Task SDK
+creation-date: '2021-06-15'
+last-updated: '2021-06-15'
+authors:
+- '@ScrapCodes'
+---
 
-<!--
-**Note:** When your TEP is complete, all of these comment blocks should be removed.
-
-To get started with this template:
-
-- [ ] **Fill out this file as best you can.**
-  At minimum, you should fill in the "Summary", and "Motivation" sections.
-  These should be easy if you've preflighted the idea of the TEP with the
-  appropriate Working Group.
-- [ ] **Create a PR for this TEP.**
-  Assign it to people in the SIG that are sponsoring this process.
-- [ ] **Merge early and iterate.**
-  Avoid getting hung up on specific details and instead aim to get the goals of
-  the TEP clarified and merged quickly.  The best way to do this is to just
-  start with the high-level sections and fill out details incrementally in
-  subsequent PRs.
-
-Just because a TEP is merged does not mean it is complete or approved.  Any TEP
-marked as a `proposed` is a working document and subject to change.  You can
-denote sections that are under active debate as follows:
-
-```
-<<[UNRESOLVED optional short context or usernames ]>>
-Stuff that is being argued.
-<<[/UNRESOLVED]>>
-```
-
-When editing TEPS, aim for tightly-scoped, single-topic PRs to keep discussions
-focused.  If you disagree with what is already in a document, open a new PR
-with suggested changes.
-
-If there are new details that belong in the TEP, edit the TEP.  Once a
-feature has become "implemented", major changes should get new TEPs.
-
-The canonical place for the latest set of instructions (and the likely source
-of this file) is [here](/teps/NNNN-TEP-template/README.md).
-
--->
-
-<!--
-This is the title of your TEP.  Keep it short, simple, and descriptive.  A good
-title can help communicate what the TEP is and should be considered as part of
-any review.
--->
-
-<!--
-A table of contents is helpful for quickly jumping to sections of a TEP and for
-highlighting any additional information provided beyond the standard TEP
-template.
-
-Ensure the TOC is wrapped with
-  <code>&lt;!-- toc --&rt;&lt;!-- /toc --&rt;</code>
-tags, and then generate with `hack/update-toc.sh`.
--->
+# TEP-0071: Custom Task SDK
 
 <!-- toc -->
 - [Summary](#summary)
 - [Motivation](#motivation)
-  - [Goals](#goals)
-  - [Non-Goals](#non-goals)
-  - [Use Cases (optional)](#use-cases-optional)
+    - [Goals](#goals)
+    - [Non-Goals](#non-goals)
+    - [Use Cases (optional)](#use-cases-optional)
 - [Requirements](#requirements)
 - [Proposal](#proposal)
-  - [Notes/Caveats (optional)](#notescaveats-optional)
-  - [Risks and Mitigations](#risks-and-mitigations)
-  - [User Experience (optional)](#user-experience-optional)
-  - [Performance (optional)](#performance-optional)
+    - [Notes/Caveats (optional)](#notescaveats-optional)
+    - [Risks and Mitigations](#risks-and-mitigations)
+    - [User Experience (optional)](#user-experience-optional)
+    - [Performance (optional)](#performance-optional)
 - [Design Details](#design-details)
 - [Test Plan](#test-plan)
 - [Design Evaluation](#design-evaluation)
@@ -79,47 +34,36 @@ tags, and then generate with `hack/update-toc.sh`.
 
 ## Summary
 
-<!--
-This section is incredibly important for producing high quality user-focused
-documentation such as release notes or a development roadmap.  It should be
-possible to collect this information before implementation begins in order to
-avoid requiring implementors to split their attention between writing release
-notes and implementing the feature itself.
-
-A good summary is probably at least a paragraph in length.
-
-Both in this section and below, follow the guidelines of the [documentation
-style guide]. In particular, wrap lines to a reasonable length, to make it
-easier for reviewers to cite specific portions, and to minimize diff churn on
-updates.
-
-[documentation style guide]: https://github.com/kubernetes/community/blob/master/contributors/guide/style-guide.md
--->
+A Custom Task SDK will make the work of custom task author easier and will offer
+standard way to implement custom task controllers. While adhering to current
+separation of concern between a custom task controller's role and tektoncd owned
+controller's role, it should make custom tasks easier to manage and reason by
+tektoncd.
 
 ## Motivation
 
-<!--
-This section is for explicitly listing the motivation, goals and non-goals of
-this TEP.  Describe why the change is important and the benefits to users.  The
-motivation section can optionally provide links to [experience reports][] to
-demonstrate the interest in a TEP within the wider Tekton community.
-
-[experience reports]: https://github.com/golang/go/wiki/ExperienceReports
--->
+1. Currently, a custom task author has limited ways to know what is a standard way
+    of developing the custom task. Their best bet is to explore one of the existing 
+   implementation in `experimental/` repo.
+2. However, an experimental custom task may not be up to date with the latest `tektoncd`
+   code base version. There is no one goto place, where a Task author can find upto
+   date example.
+3. Presently, `tektoncd` does not manage the life cycle of a custom task at all.
+   A SDK can open up newer possibilities in this regard.
+4. SDK available as a project template, can perform some of common tasks,
+   generate boiler-plate code and provide helper functions/scripts.
 
 ### Goals
 
-<!--
-List the specific goals of the TEP.  What is it trying to achieve?  How will we
-know that this has succeeded?
--->
+1. Provide a Github template with a simple controller and CRD implementation,
+   which a user can fork and develop his own custom task controller.
+2. Provide helper functions/packages for common tasks and documentation
+   with best practices.
 
 ### Non-Goals
 
-<!--
-What is out of scope for this TEP?  Listing non-goals helps to focus discussion
-and make progress.
--->
+- providing SDKs in languages other than Go
+- providing a generic CRD controller lib
 
 ### Use Cases (optional)
 
@@ -274,8 +218,4 @@ It will be a quick reference for those looking for implementation of this TEP.
 
 ## References (optional)
 
-<!--
-Use this section to add links to GitHub issues, other TEPs, design docs in Tekton
-shared drive, examples, etc. This is useful to refer back to any other related links
-to get more details.
--->
+1. [Governance approval](https://github.com/tektoncd/community/issues/459)

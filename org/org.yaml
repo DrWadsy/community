@@ -52,8 +52,10 @@ orgs:
     - fenglixa
     - fhopfensperger
     - font
+    - frerikandriessen
     - gabemontero
     - garethr
+    - GijsvanDulmen
     - GregDritschler
     - hone
     - houshengbo
@@ -77,6 +79,7 @@ orgs:
     - kimsterv
     - loosebazooka
     - lukehinds
+    - LyndseyBu
     - maneeshmehra
     - marcelmue
     - mattmoor
@@ -84,6 +87,7 @@ orgs:
     - mnuttall
     - mpeddada1
     - mpeters
+    - mrutkows
     - n3wscott
     - nader-ziada
     - navidshaikh
@@ -109,6 +113,8 @@ orgs:
     - sbose78
     - sbwsg
     - sclevine
+    - scrapcodes
+    - shaowenchen
     - shashwathi
     - simonjjones
     - skaegi
@@ -167,9 +173,8 @@ orgs:
         description: the cli maintainers
         maintainers:
         - vdemeester
-        - bobcatfish
-        members:
         - chmouel
+        members:
         - sthaha
         - piyush-garg
         - hrishin
@@ -202,12 +207,8 @@ orgs:
         - skaegi
         members:
         - AlanGreene
-        - mnuttall
-        - a-roberts
-        - dibbles
-        - eddycharly
+        - briangleeson
         - steveodonovan
-        - carolynmabbott
         privacy: closed
         repos:
           dashboard: write
@@ -474,6 +475,7 @@ orgs:
         - skaegi
         - jessm12
         - ziheng
+        - LyndseyBu
         privacy: closed
         repos:
           dashboard: read
@@ -507,6 +509,8 @@ orgs:
         - pritidesai
         - jerop
         - bigkevmcd
+        - sbwsg
+        - waveywaves
         privacy: closed
         repos:
           experimental: read
@@ -534,17 +538,14 @@ orgs:
       cli.collaborators:
         description: The cli collaborators
         maintainers:
-        - abayer
-        - bobcatfish
-        - ImJasonH
+        - chmouel
+        - vdemeester
         members:
         - Divyansh42
         - pradeepitm12
         - khrm
-        - vdemeester
         - danielhelfand
         - piyush-garg
-        - chmouel
         - praveen4g0
         - savitaashture
         - waveywaves
@@ -612,6 +613,7 @@ orgs:
         - gabemontero
         - marcelmue
         - jmcshane
+        - sm43
         privacy: closed
         repos:
           triggers: read
@@ -622,14 +624,15 @@ orgs:
         - afrittoli
         - bobcatfish
         - ImJasonH
+        - vdemeester
         members:
         - houshengbo
         - nikhil-thomas
         - pradeepitm12
         - savitaashture
-        - vdemeester
         - vincent-pli
         - piyush-garg
+        - sm43
         privacy: closed
         repos:
           operator: read

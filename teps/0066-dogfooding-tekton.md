@@ -1,3 +1,12 @@
+---
+status: proposed
+title: Dogfooding Tekton
+creation-date: '2021-05-16'
+last-updated: '2021-05-16'
+authors: ['afrittoli']
+---
+
+# TEP-0066: Dogfooding Tekton
 
 <!--
 **Note:** When your TEP is complete, all of these comment blocks should be removed.
@@ -39,12 +48,6 @@ of this file) is [here](/teps/NNNN-TEP-template/README.md).
 -->
 
 <!--
-This is the title of your TEP.  Keep it short, simple, and descriptive.  A good
-title can help communicate what the TEP is and should be considered as part of
-any review.
--->
-
-<!--
 A table of contents is helpful for quickly jumping to sections of a TEP and for
 highlighting any additional information provided beyond the standard TEP
 template.
@@ -73,28 +76,21 @@ tags, and then generate with `hack/update-toc.sh`.
 - [Alternatives](#alternatives)
 - [Infrastructure Needed (optional)](#infrastructure-needed-optional)
 - [Upgrade &amp; Migration Strategy (optional)](#upgrade--migration-strategy-optional)
-- [Implementation Pull request(s)](#implementation-pull-request-s)
 - [References (optional)](#references-optional)
 <!-- /toc -->
 
 ## Summary
 
-<!--
-This section is incredibly important for producing high quality user-focused
-documentation such as release notes or a development roadmap.  It should be
-possible to collect this information before implementation begins in order to
-avoid requiring implementors to split their attention between writing release
-notes and implementing the feature itself.
+The Tekton community has been "dogfooding" Tekton since the early stages of the
+project.
 
-A good summary is probably at least a paragraph in length.
+> The term "dogfooding" is an IT slang for the use of one's own products.
+> In some uses, it implies that developers or companies are using their own products
+> to work out bugs, as in beta testing. One benefit of dogfooding is that it shows
+> that a company is confident about its products.
 
-Both in this section and below, follow the guidelines of the [documentation
-style guide]. In particular, wrap lines to a reasonable length, to make it
-easier for reviewers to cite specific portions, and to minimize diff churn on
-updates.
-
-[documentation style guide]: https://github.com/kubernetes/community/blob/master/contributors/guide/style-guide.md
--->
+We would like to capture the goals of the dogfooding effort in the Tekton community,
+as document guiding principles, existing achievements as well as future roadmap.
 
 ## Motivation
 
@@ -107,38 +103,58 @@ demonstrate the interest in a TEP within the wider Tekton community.
 [experience reports]: https://github.com/golang/go/wiki/ExperienceReports
 -->
 
+The dogfooding effort in Tekton has been going on since the early stages of the project,
+so why writing a TEP now?
+
+When the dogfooding work was started we did not have a TEP process in place, we relied on
+[shared Google documents](https://docs.google.com/document/d/1Tf3tdIBwkN5kxMuyYMo802F-DyOdsl_bgh-78a9prWQ/edit#)
+instead. This TEP captures the work done this far, its guiding principles, the future
+roadmap; it aims to raise awareness about this work in the community, and to make it
+easier for new developers to get started and contribute to it.
+
 ### Goals
 
-<!--
-List the specific goals of the TEP.  What is it trying to achieve?  How will we
-know that this has succeeded?
--->
+Tekton is non-opinionated by design. It allows designing CI/CD pipelines and systems,
+but it's not prescriptive about how to do that. The dogfooding effort offers CI/CD
+services to the Tekton community through Tekton, and in doing so it must take design
+decisions on how to build such services through Tekton. Goals of this TEP are to:
+
+- Formalize the motivation for the dogfooding effort
+- Describe the design principles for CI/CD services based on Tekton
+- Identify the services implemented through Tekton
+- Identify areas were more work is needed and define a future roadmap
 
 ### Non-Goals
 
-<!--
-What is out of scope for this TEP?  Listing non-goals helps to focus discussion
-and make progress.
--->
+This TEP does not aim to design specific services based on Tekton, that work will be tracked
+in dedicated TEPs where needed.
 
 ### Use Cases (optional)
 
-<!--
-Describe the concrete improvement specific groups of users will see if the
-Motivations in this doc result in a fix or feature.
+Use cases that the dogfooding effort implements are:
 
-Consider both the user's role (are they a Task author? Catalog Task user?
-Cluster Admin? etc...) and experience (what workflows or actions are enhanced
-if this problem is solved?).
--->
+- Experience Tekton from the operator, author and user point of view, which allows the
+  Tekton community to:
+  - Identify missing functional features and usability issues
+  - Identify operational problems and security concerns
+  - Discover bugs that can be better identified in a running system, such as upgrade issues,
+    a problems related to maintainability and scale
+  - Help validating nightly and full releases, discover regressions and integration issues
+- Offer CI/CD services to the Tekton community with minimal dependencies
+  to other products, and thus greater control on the outcome
+- Build a repository of examples that embody best practices for Tekton use to tap in
 
 ## Requirements
 
-<!--
-Describe constraints on the solution that must be met. Examples might include
-performance characteristics that must be met, specific edge cases that must
-be handled, or user scenarios that will be affected and must be accomodated.
--->
+- Provide reliable CI/CD services to the Tekton community
+- Dogfood as many project projects as possible, from the most stable and mature to
+  the experimental ones
+- Provide a mean to experiment with alpha and experimental features and build a way
+  forward to stable
+- Provide documentation about how to operate dogfooding services, as well as how to
+  contribute to their development
+- Keep a low barrier to entry to experimentation and at the same time safeguard
+  production type of dogfooding services
 
 ## Proposal
 
@@ -172,6 +188,47 @@ How will UX be reviewed and by whom?
 
 Consider including folks that also work outside the WGs or subproject.
 -->
+
+We want to offer continuous integration and continuous delivery services to
+the Tekton community, which are essential to the development of Tekton itself.
+This goes in contrast with the need of dogfooding alpha stability and even
+experimental services. Mitigations for this are:
+
+- Use a multi-cluster setup:
+  - One cluster runs nightly releases and experimental code. This cluster may
+    offer services, but no essential ones, so that Tekton development may continue
+    normally if this cluster is broken.
+  - One cluster runs major releases of Tekton components (when available).
+    Until we are able to provide automated service verification and rollback
+    capabilities, deployments to this cluster are vetted by humans.
+    Write / admin access to this cluster is reduced to a limited number of
+    individuals. This cluster may offer essential services.
+- The build-captain role: there is always at least on person per day on duty (at
+  least during working hours in one TZ) to verify the status of CI/CD services
+  and respond to incidents.
+- Introduce Tekton based services incrementally. For experimental components, if
+  an alternative is available, use the experimental component only in a few places
+  until the component has proven stable enough.
+
+Using experimental Tekton components in production may raise security concerns.
+Mitigations are somewhat similar to those already discussed:
+
+- Use experimental components for non essential services. This allows stopping
+  a service completely in case a critical security issue is discovered. When a
+  non-experimental alternative is not available, we may use experimental
+  components for essential services too but we should document the impact of
+  taking down the service and possibly provide a mitigation plan until service
+  can be restored.
+- Fully automate the setup of the clusters, and document any exception. In case
+  secrets are exposed, this allows to easily re-create the clusters with new
+  secrets and restore secure services.
+
+These risks have the positive side effect of increasing the awareness of critical
+issue in the community as well as the motivation for a prompt resolution.
+Now that Tekton is more widely adopted, we see a similar effect with Tekton users
+who stay on top of Tekton latest releases, as we get issues reported right after
+a release, if a feature that is not well exercised through testing and dogfooding
+is broken by a release.
 
 ### User Experience (optional)
 
@@ -263,15 +320,6 @@ migration strategy. This is especially useful when we modify a
 behavior or add a feature that may replace and deprecate a current one.
 -->
 
-## Implementation Pull request(s)
-
-<!--
-Once the TEP is ready to be marked as implemented, list down all the Github
-Pull-request(s) merged.
-Note: This section is exclusively for merged pull requests, for this TEP.
-It will be a quick reference for those looking for implementation of this TEP.
--->
-
 ## References (optional)
 
 <!--
@@ -279,3 +327,5 @@ Use this section to add links to GitHub issues, other TEPs, design docs in Tekto
 shared drive, examples, etc. This is useful to refer back to any other related links
 to get more details.
 -->
+
+- Original [design document](https://docs.google.com/document/d/1Tf3tdIBwkN5kxMuyYMo802F-DyOdsl_bgh-78a9prWQ/edit#)

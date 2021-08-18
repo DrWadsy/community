@@ -40,6 +40,7 @@ Original Google Doc proposal, visible to members of tekton-dev@: https://docs.go
   - [Infrastructure Needed (optional)](#infrastructure-needed-optional)
   - [Upgrade &amp; Migration Strategy (optional)](#upgrade--migration-strategy-optional)
 - [Open Questions](#open-questions)
+  - [Implementation Pull request(s)](#implementation-pull-requests)
 <!-- /toc -->
 
 ## Summary
@@ -331,9 +332,24 @@ Supporting cancellation is optional but recommended.
 
 ### Timeout
 
-Today, users can specify a timeout for a component `Task` of a `Pipeline` (see [`PipelineTask.Timeout`](https://godoc.org/github.com/tektoncd/pipeline/pkg/apis/pipeline/v1beta1#PipelineTask)). The `Run` type will specify a `Timeout` field to hold this value when created as part of a `PipelineRun` (or when `Run`s are created directly). Custom Task authors can read and propagate this field if desired, but a Tekton-owned controller will be responsible for tracking this timeout and updating timed out `Run`s to signal unsuccessful execution.
+Today, users can specify a timeout for a component `Task` of a `Pipeline` (see
+[`PipelineTask.Timeout`](https://godoc.org/github.com/tektoncd/pipeline/pkg/apis/pipeline/v1beta1#PipelineTask)).
+The `Run` type will specify a `Timeout` field to hold this value when created
+as part of a `PipelineRun` (or when `Run`s are created directly). Custom Task
+authors can read and propagate this field if desired.
 
-A Custom Task author can watch for this status update and take any corresponding actions (e.g., cancel a cloud build, stop the waiting timer, tear down the approval listener).
+Tekton-owned controller will not forcibly update the `.status` of a
+Run directly. This will be the responsibility of Custom Task controller.
+
+For a PipelineRun with either a pipeline level timeout configured and/or the
+custom task level timout configuration, timeout is updated to the run with same
+policy as it is for task runs. On timeout, the running run's status is updated with
+"RunCancelled". 
+
+A Custom Task author can watch for this status update (i.e. 
+`Run.Spec.Status == RunCancelled`) and or `Run.HasTimedOut()` and take any
+corresponding actions ( i.e. a clean up e.g., cancel a cloud build, stop the
+waiting timer, tear down the approval listener).
 
 Supporting timeouts is optional but recommended.
 
@@ -426,3 +442,8 @@ TBD. At this time, the proposal only covers adding new a type and documentating 
 * Versioning and release cadence and ownership of `tektoncd/sample-task` repo; will it be released/versioned alongside `tektoncd/pipeline`?
 
 * Support for "unnamed" Tasks -- i.e., `Run`s that reference an `apiVersion` and `kind`, but not a `name`. A Custom Task author could either use this to provide "default" behavior where a Task CR doesn't need to be defined, or could not define a CRD at all and only support functionality specified by params. Examples of this are `CEL` and `Wait` tasks that just accept a param for `expression` or `duration`, and don't require defining a `CEL` or `Wait` CRD type.
+
+## Implementation Pull request(s)
+
+1. [API Changes, docs and e2e tests](https://github.com/tektoncd/pipeline/pull/3463)
+2. [Do not allow use of deprecated Conditions with custom tasks](https://github.com/tektoncd/pipeline/pull/3601)

@@ -36,6 +36,7 @@ The current working groups are:
 - [Dashboard](#dashboard)
 - [Catalog and Hub](#catalog-and-hub)
 - [Operator and Deployment](#operator-and-deployment)
+- [Chains](#chains)
 
 ## General
 
@@ -64,7 +65,6 @@ We altenate between two meeting times, a time that is friendly for Europe + Nort
 | <img width="30px" src="https://github.com/bobcatfish.png"> | Christie Wilson | Google  | [bobcatfish](https://github.com/bobcatfish) |
 | <img width="30px" src="https://github.com/skaegi.png">     | Simon Kaegi     | IBM     | [skaegi](https://github.com/skaegi)         |
 | <img width="30px" src="https://github.com/dibyom.png">     | Dibyo Mukherjee | Google  | [dibyom](https://github.com/dibyom)         |
-| <img width="30px" src="https://github.com/chhsia0.png">    | Chun-Hung Hsiao | D2iQ    | [chhsia0](https://github.com/chhsia0)       |
 | <img width="30px" src="https://github.com/pritidesai.png"> | Priti Desai     | IBM     | [pritidesai](https://github.com/pritidesai) |
 | <img width="30px" src="https://github.com/imjasonh.png">   | Jason Hall      | Red Hat | [imjasonh](https://github.com/imjasonh)     |
 
@@ -89,7 +89,7 @@ This is the [`tektoncd/triggers`](https://github.com/tektoncd/triggers) working 
 | Forum                      | [tekton-dev@](https://groups.google.com/forum/#!forum/tekton-dev) |
 | Community Meeting VC       | [https://meet.google.com/oqm-imjh-uzu](https://meet.google.com/oqm-imjh-uzu) |
 | Community Meeting Calendar | Wednesdays every week, 11:00p-11:30p EST <br>[Calendar](https://calendar.google.com/event?action=TEMPLATE&tmeid=ZDA3YzZldXZqZ2M1ajBndWVkNzRlNTdzN2ZfMjAyMDExMThUMTYwMDAwWiBnb29nbGUuY29tX2Qzb3Zjdm8xcDMyMTloOTg5NTczdjk4Zm5zQGc&tmsrc=google.com_d3ovcvo1p3219h989573v98fns%40group.calendar.google.com&scp=ALL) |
-| Meeting Notes              | [Notes](https://docs.google.com/document/d/1T87yK4BIu291gGK1L2ZzDpesGCnXX3tGuWXjdr5Soxw/edit) |
+| Meeting Notes              | [Notes](https://docs.google.com/document/d/16dtgpeNQgpC33gjZEFUqQv-G7QwVDHbuwJQOGmy1l7w/edit) |
 | Document Folder            | [Folder](https://drive.google.com/drive/folders/1-UOR-sodtMeYqtUEzVW12nkfJCr7EQRO) |
 | Slack Channel              | [#triggers](https://tektoncd.slack.com/messages/triggers) |
 
@@ -119,6 +119,7 @@ This is the [`tektoncd/cli`](https://github.com/tektoncd/cli) working group.
 | <img width="30px" src="https://github.com/danielhelfand.png"> | Daniel Helfand   | VMware  | [danielhelfand](https://github.com/danielhelfand) |
 | <img width="30px" src="https://github.com/pradeepitm12.png">  | Pradeep Kumar    | Red Hat | [pradeepitm12](https://github.com/pradeepitm12)   |
 | <img width="30px" src="https://github.com/pgarg.png">         | Piyush Garg      | Red Hat | [piyush-garg](https://github.com/piyush-garg)     |
+| <img width="30px" src="https://github.com/vinamra28.png">   | Vinamra Jain       | Red Hat | [vinamra28](https://github.com/vinamra28)      |
 
 ## Documentation
 
@@ -217,7 +218,6 @@ Tekton projects.
 | <img width="30px" src="https://github.com/afrittoli.png">  | Andrea Frittoli   | IBM     | [afrittoli](https://github.com/afrittoli)   |
 | <img width="30px" src="https://github.com/skaegi.png">     | Simon Kaegi       | IBM     | [skaegi](https://github.com/skaegi)         |
 | <img width="30px" src="https://github.com/dibyom.png">     | Dibyo Mukherjee   | Google  | [dibyom](https://github.com/dibyom)         |
-| <img width="30px" src="https://github.com/chhsia0.png">    | Chun-Hung Hsiao   | D2iQ    | [chhsia0](https://github.com/chhsia0)       |
 | <img width="30px" src="https://github.com/pritidesai.png"> | Priti Desai       | IBM     | [pritidesai](https://github.com/pritidesai) |
 
 ### Australia + North America
@@ -296,3 +296,20 @@ This is the working group for [`tektoncd/operator`](https://github.com/tektoncd/
 | <img width="30px" src="https://github.com/khrm.png">          | Khurram Baig  | Red Hat | [khrm](https://github.com/khrm)                   |
 | <img width="30px" src="https://github.com/pgarg.png">         | Piyush Garg   | Red Hat | [piyush-garg](https://github.com/piyush-garg)     |
 | <img width="30px" src="https://github.com/sthaha.png">        | Sunil Thaha   | Red Hat | [sthaha](https://github.com/sthaha)               |
+
+## Chains
+
+This is the working group for [`tektoncd/chains`](https://github.com/tektoncd/chains)
+
+| Artifact                   | Link                       |
+| -------------------------- | -------------------------- |
+| Forum                      | [tekton-dev@](https://groups.google.com/forum/#!forum/tekton-dev) |
+| Community Meeting VC       | [https://meet.google.com/iuv-jbov-fmi](https://meet.google.com/iuv-jbov-fmi) |
+| Community Meeting Calendar | Thursdays every other week, 9am -9:30am PST <br>[Calendar](https://calendar.google.com/calendar/u/0/r/eventedit/copy/Nzc3N2VjZjk3amZnZzc5MDQwODYxNzRrZHVfMjAyMTA2MTBUMTYwMDAwWiBnb29nbGUuY29tX2Qzb3Zjdm8xcDMyMTloOTg5NTczdjk4Zm5zQGc/cHJpeWF3YWRod2FAZ29vZ2xlLmNvbQ?scp=ALL) |
+| Meeting Notes              | [Notes](https://docs.google.com/document/d/1UVPSCDyNO-TzEFSv8jrqrEOF_FmV8NFuXncFm1gwmeY/edit) |
+| Slack Channels             | [#chains](https://tektoncd.slack.com/messages/chains) |
+
+| &nbsp;                                                         | Facilitators   | Company | Profile                                           |
+| -----------------------------------------------------------    | ----------     | ------- | ------------------------------------------------  |
+| <img width="30px" src="https://github.com/dlorenc.png">        | Dan Lorenc     | Google  | [dlorenc](https://github.com/dlorenc) |
+| <img width="30px" src="https://github.com/priyawadhwa.png">    | Priya Wadhwa   | Google  | [priyawadhwa](https://github.com/priyawadhwa)     |
